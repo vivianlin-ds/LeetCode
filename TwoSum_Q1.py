@@ -1,7 +1,7 @@
 def twoSum(self, nums: list[int], target: int) -> list[int]:
     hold = {}
     for i, values in enumerate(nums):
-        remain = target - nums[i]
+        remain = target - values
         if remain in hold:
             return [hold[remain], i]
         else:
