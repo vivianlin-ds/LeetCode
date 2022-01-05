@@ -1,25 +1,25 @@
 def longestCommonPrefix(self, strs: list[str]) -> str:
-    # Need to compare each letter in string and return it if common
-    # Sort the list alphabetically and list will go from short words to long
-    strs.sort()
+    # Need to compare each word in string and return common prefix
+    strs.sort(key=len)   # Sort the list by length of word
+    oneword = strs[0]    # For one worded strings, len=1
     prefix = ""
 
-    if len(strs) == 0:     # For edge case, nothing in list
-        return prefix
-    else:
-        for wordindex in range(0, len(strs[0])):   # Set i from 0 to length of first word in sorted list
-            current = strs[0][wordindex]
-            for listindex in range(1, len(strs)-1):
+    if len(set(strs)) > 1:
+        for wordindex in range(0, len(strs[0])):               # Look at individual letters of the word
+            current = strs[0][wordindex]                       # Store each letter in current
+            for listindex in range(1, len(strs)):              # Look at individual words in string
                 if current != strs[listindex][wordindex]:
-                    return prefix
-                else:
-                    prefix += current
+                    return prefix                              # Exit loop if no common letter
+            prefix += current                                  # Add current to prefix only after all are common
+        return prefix
+    return oneword
 
 
 def main():
     print(longestCommonPrefix(self=True, strs=["flower", "flow", "flight"]))
     print(longestCommonPrefix(self=True, strs=["dog", "racecar", "car"]))
-    print(longestCommonPrefix(self=True, strs=[""]))
+    print(longestCommonPrefix(self=True, strs=["car", "cir"]))
+    print(longestCommonPrefix(self=True, strs=["", ""]))
 
 
 if __name__ == '__main__':
