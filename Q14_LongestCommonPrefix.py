@@ -14,12 +14,27 @@ def longestCommonPrefix(self, strs: list[str]) -> str:
         return prefix
     return oneword
 
+def commonprefix(self, strs: list[str]) -> str:
+    # Use zip() instead of multiple loops, much faster than method above
+    zipstrs = list(zip(*strs))                # Give letters up to the shortest word
+    zipprefix = ""
+    for i in zipstrs:
+        if len(set(i)) == 1:                  # Look at individual tuple, set no duplication allowed
+            zipprefix += i[0]
+        else:
+            break
+    return zipprefix
+
 
 def main():
     print(longestCommonPrefix(self=True, strs=["flower", "flow", "flight"]))
     print(longestCommonPrefix(self=True, strs=["dog", "racecar", "car"]))
     print(longestCommonPrefix(self=True, strs=["car", "cir"]))
     print(longestCommonPrefix(self=True, strs=["", ""]))
+    print(commonprefix(self=True, strs=["flower", "flow", "flight"]))
+    print(commonprefix(self=True, strs=["dog", "racecar", "car"]))
+    print(commonprefix(self=True, strs=["car", "cir"]))
+    print(commonprefix(self=True, strs=["", ""]))
 
 
 if __name__ == '__main__':
