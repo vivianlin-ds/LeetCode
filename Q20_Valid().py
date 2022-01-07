@@ -1,34 +1,28 @@
 def isValid(self, s: str) -> bool:
-    # for n in s:
-    #     if n == "(":
-    #         s = s.replace("(", ")")
-    #     elif n == "{":
-    #         s = s.replace("{", "}")
-    #     elif n == "[":
-    #         s = s.replace("[", "]")
-    # count1 = s.count(")")
-    # count2 = s.count("}")
-    # count3 = s.count("]")
-    # return count1 % 2 ==0 and count2 % 2 == 0 and count3 %2 == 0:
-
+    # Set up variables so that the brackets matches index number
     openbrac = ['(', '{', '[']
-    closebrac = [')', '}', '}']
+    closebrac = [')', '}', ']']
     stack = []
 
     for brac in s:
         if brac in openbrac:
             stack.append(brac)
         elif brac in closebrac:
+            # Store the index of the closed bracket to check against last element stored
             b_index = closebrac.index(brac)
-            if (len(stack) > 0) and (openbrac[b_index] == stack[len(stack) - 1]):
+            # Check if the last element in stack matches the closed bracket
+            if (len(stack) > 0) and (openbrac[b_index] == stack[-1]):
+                # Remove the last element from stack
                 stack.pop()
             else:
                 return False
+    # Valid parentheses should have nothing in stack left
     return len(stack) == 0
 
 
 def main():
-    # print(isValid(self=True, s="()"))
+    print(isValid(self=True, s="()"))
+    print(isValid(self=True, s="(]"))
     print(isValid(self=True, s="({})]"))
 
 
