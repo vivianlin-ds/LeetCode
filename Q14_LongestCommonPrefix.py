@@ -1,29 +1,48 @@
+# Question: Find the longest common prefix string amongst an array of strings,
+# return empty "" if no common prefix.
 def longestCommonPrefix(self, strs: list[str]) -> str:
-    # Need to compare each word in string and return common prefix
-    strs.sort(key=len)   # Sort the list by length of word
-    oneword = strs[0]    # For one worded strings, len=1
+    # Need to compare each letter of each word in string: strs[a][b]
+    # Sort the list by length of word, from shortest to longest word
+    strs.sort(key=len)
+
+    # For one worded strings, len=1
+    oneword = strs[0]
+    # Store extracted letters
     prefix = ""
 
-    if len(set(strs)) > 1:
-        for wordindex in range(0, len(strs[0])):               # Look at individual letters of the word
-            current = strs[0][wordindex]                       # Store each letter in current
-            for listindex in range(1, len(strs)):              # Look at individual words in string
+    if len(strs) > 1:
+        # Look at individual letters of the word: b of strs[a][b]
+        for wordindex in range(0, len(strs[0])):
+            # Store each letter in current
+            current = strs[0][wordindex]
+
+            # Look at individual words in string: a of strs[a][b]
+            for listindex in range(1, len(strs)):
+                # Exit loop if no common letter
                 if current != strs[listindex][wordindex]:
-                    return prefix                              # Exit loop if no common letter
-            prefix += current                                  # Add current to prefix only after all are common
+                    return prefix
+
+            # Add current to prefix only after loop through all words in list
+            prefix += current
         return prefix
+
+    # Return answer for one worded strings
     return oneword
 
+
 def commonprefix(self, strs: list[str]) -> str:
-    # Use zip() instead of multiple loops, much faster than method above
-    zipstrs = list(zip(*strs))                # Give letters up to the shortest word
-    zipprefix = ""
-    for i in zipstrs:
-        if len(set(i)) == 1:                  # Look at individual tuple, set no duplication allowed
-            zipprefix += i[0]
+    # Use zip() instead of multiple loops
+    # Give individual letters up to the shortest word
+    zip_strs = list(zip(*strs))
+    zip_prefix = ""
+    for char in zip_strs:
+        # Look at individual tuple, use 'set' so no duplication allowed, len == 1 if common
+        if len(set(char)) == 1:
+            zip_prefix += char[0]
+        # End loop if no common letter is found, do not continue past first different letter
         else:
             break
-    return zipprefix
+    return zip_prefix
 
 
 def main():
