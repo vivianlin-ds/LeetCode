@@ -1,4 +1,4 @@
-# Question: Given root of binary tree, return iorder traversal of its nodes' values
+# Question: Given root of binary tree, return preoder traversal of its nodes' values
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -7,7 +7,7 @@ class TreeNode:
         self.right = right
 
 
-def inorderTraversalrecur(root):
+def preorderTraversalrecur(root):
     """Recursive solution"""
     root = TreeNode(root)
     res = []
@@ -15,15 +15,16 @@ def inorderTraversalrecur(root):
     if not root:
         return
     else:
-        res += inorderTraversalrecur(root.left)
         res.append(root.val)
-        res += inorderTraversalrecur(root.right)
+        res += preorderTraversalrecur(root.left)
+        res += preorderTraversalrecur(root.right)
 
     return res
 
 
 # Follow up: Recursive solution is trivial, could you do it iteratively?
-def inorderTraversaliter(root):
+
+def preorderTraversaliter(root):
     """Iterative solution with stack"""
     root = TreeNode(root)
     res = []
@@ -31,23 +32,20 @@ def inorderTraversaliter(root):
 
     while stack or root:
         if root:
+            res.append(temp.val)
             stack.append(root)
             root = root.left
         else:
             temp = stack.pop()
-            res.append(temp.val)
             root = temp.right
 
     return res
 
 
 def main():
-    print(inorderTraversalrecur(root=[1, None, 2, 3]))
-    print(inorderTraversalrecur(root=[1, 2, 3, 4, 5, 6, 7]))
-    print(inorderTraversalrecur(root=[]))
-    print(inorderTraversaliter(root=[1, None, 2, 3]))
-    print(inorderTraversaliter(root=[1, 2, 3, 4, 5, 6, 7]))
-    print(inorderTraversaliter(root=[]))
+    print(preorderTraversalrecur(root=[1, None, 2, 3]))
+    print(preorderTraversalrecur(root=[1, 2, 3, 4, 5, 6, 7]))
+    print(preorderTraversalrecur(root=[]))
 
 
 if __name__ == '__main__':
