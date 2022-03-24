@@ -12,9 +12,7 @@ def preorderTraversalrecur(root):
     root = TreeNode(root)
     res = []
 
-    if not root:
-        return
-    else:
+    if root:
         res.append(root.val)
         res += preorderTraversalrecur(root.left)
         res += preorderTraversalrecur(root.right)
@@ -32,11 +30,12 @@ def preorderTraversaliter(root):
 
     while stack or root:
         if root:
-            res.append(temp.val)
             stack.append(root)
             root = root.left
+
         else:
             temp = stack.pop()
+            res.append(temp.val)
             root = temp.right
 
     return res

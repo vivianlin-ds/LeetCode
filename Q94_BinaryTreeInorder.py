@@ -12,9 +12,7 @@ def inorderTraversalrecur(root):
     root = TreeNode(root)
     res = []
 
-    if not root:
-        return
-    else:
+    if root:
         res += inorderTraversalrecur(root.left)
         res.append(root.val)
         res += inorderTraversalrecur(root.right)
